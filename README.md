@@ -1,27 +1,25 @@
-# Remix
+# noted
 
-This directory is a brief example of a [Remix](https://remix.run/docs) site that can be deployed to Vercel with zero configuration.
+## Install
 
-## Deploy Your Own
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/remix&template=remix)
-
-_Live Example: https://remix-run-template.vercel.app_
-
-## Development
-
-To run your Remix app locally, make sure your project's local dependencies are installed:
-
-```sh
+```bash
 npm install
 ```
 
-Afterwards, start the Remix development server like so:
+**Having issues installing? See our [debugging guide](https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues/400)**
 
-```sh
-npm run dev
+## Starting Development
+
+Start the app in the `dev` environment:
+
+```bash
+npm start
 ```
 
-Open up [http://localhost:3000](http://localhost:3000) and you should be ready to go!
+## Packaging for Production
 
-If you're used to using the `vercel dev` command provided by [Vercel CLI](https://vercel.com/cli) instead, you can also use that, but it's not needed.
+To package apps for the local platform:
+
+```bash
+npm run package
+```
