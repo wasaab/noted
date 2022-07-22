@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box, CssBaseline, styled, ThemeProvider } from '@mui/material';
 import debounce from 'lodash.debounce';
 import Editor from '@noted-md/rich-markdown-editor';
-import { Drawer, SettingsModal, TrashModal } from './components';
+import { Drawer, FavoritesBar, SettingsModal, TrashModal } from './components';
 import { darkTheme, editorColorTheme } from './styles';
 import { saveNote } from './store';
 import { IpcEvent } from './model';
@@ -83,15 +83,7 @@ export default function Index() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline enableColorScheme />
-      <Box
-        display="flex"
-        spellCheck={false}
-        sx={{
-          position: 'fixed',
-          inset: 0,
-          top: 30
-        }}
-      >
+      <Box display="flex" height="100%" spellCheck={false}>
         <SettingsModal
           open={modalType === ModalType.SETTINGS}
           onSave={handleSettingsSave}
@@ -101,20 +93,25 @@ export default function Index() {
           open={modalType === ModalType.TRASH}
           onClose={handleModalClose}
         />
-        <Drawer
-          onSettingsOpen={() => setModalType(ModalType.SETTINGS)}
-          onTrashOpen={() => setModalType(ModalType.TRASH)}
-        />
-        <StyledEditor
-          dark
-          value={selectedNoteId ? initialValue : unselectedInitialVal}
-          placeholder="# Title"
-          readOnly={!selectedNoteId}
-          dictionary={{ newLineEmpty: undefined }}
-          colorTheme={editorColorTheme}
-          onChange={debouncedSave}
-          onBlur={() => setInitialValue('')}
-        />
+        <Box display="flex" flexDirection="column" width="100%">
+          <FavoritesBar />
+          <Box display="flex" height="100%">
+            <Drawer
+              onSettingsOpen={() => setModalType(ModalType.SETTINGS)}
+              onTrashOpen={() => setModalType(ModalType.TRASH)}
+            />
+            <StyledEditor
+              dark
+              value={selectedNoteId ? initialValue : unselectedInitialVal}
+              placeholder="# Title"
+              readOnly={!selectedNoteId}
+              dictionary={{ newLineEmpty: undefined }}
+              colorTheme={editorColorTheme}
+              onChange={debouncedSave}
+              onBlur={() => setInitialValue('')}
+            />
+          </Box>
+        </Box>
       </Box>
     </ThemeProvider>
   );

@@ -2,8 +2,17 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { Box, Menu, MenuItem, OutlinedInput, Typography } from '@mui/material';
+import {
+  FolderOutlined as FolderIcon,
+  TextSnippetOutlined as FileIcon
+} from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
-import { cancelNewNoteRename, rename, remove } from '../../store';
+import {
+  cancelNewNoteRename,
+  rename,
+  remove,
+  toggleFavorite
+} from '../../store';
 import TreeItem from './TreeItem';
 
 class MenuState {
@@ -24,8 +33,9 @@ const NoteTreeItem = ({
   id,
   parentIds,
   createdNoteId,
-  labelIcon,
   labelText,
+  isDir,
+  isFav,
   ...rest
 }) => {
   const dispatch = useDispatch();
@@ -74,6 +84,11 @@ const NoteTreeItem = ({
     setEditing(true);
   };
 
+  const handleFavToggle = () => {
+    dispatch(toggleFavorite(id));
+    closeMenu();
+  };
+
   const renderLabel = () => (
     <Box
       display="flex"
@@ -81,7 +96,7 @@ const NoteTreeItem = ({
       onContextMenu={handleContextMenuOpen}
     >
       <Box
-        component={labelIcon}
+        component={isDir ? FolderIcon : FileIcon}
         color="inherit"
         fontSize={16}
         ml={0.5}
@@ -126,6 +141,11 @@ const NoteTreeItem = ({
         anchorPosition={menu.position}
         TransitionProps={{ onExited: handleCloseFinish }}
       >
+        {!isDir && (
+          <MenuItem onClick={handleFavToggle}>
+            {isFav ? 'Unfavorite' : 'Favorite'}
+          </MenuItem>
+        )}
         <MenuItem onClick={() => initiateRename(true)}>Rename</MenuItem>
         <MenuItem onClick={handleDelete}>Delete</MenuItem>
       </Menu>
@@ -137,12 +157,14 @@ NoteTreeItem.propTypes = {
   id: PropTypes.string.isRequired,
   parentIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   createdNoteId: PropTypes.string,
-  labelIcon: PropTypes.elementType.isRequired,
-  labelText: PropTypes.string.isRequired
+  labelText: PropTypes.string.isRequired,
+  isDir: PropTypes.bool.isRequired,
+  isFav: PropTypes.bool
 };
 
 NoteTreeItem.defaultProps = {
-  createdNoteId: undefined
+  createdNoteId: undefined,
+  isFav: false
 };
 
 export default NoteTreeItem;
