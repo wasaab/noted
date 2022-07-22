@@ -83,15 +83,7 @@ export default function Index() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline enableColorScheme />
-      <Box
-        display="flex"
-        spellCheck={false}
-        sx={{
-          position: 'fixed',
-          inset: 0,
-          top: 30
-        }}
-      >
+      <Box display="flex" height="100%" spellCheck={false}>
         <SettingsModal
           open={modalType === ModalType.SETTINGS}
           onSave={handleSettingsSave}

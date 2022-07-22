@@ -1,20 +1,21 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  Menu,
+  MenuItem,
   styled,
   Tab,
+  tabClasses,
   Tabs,
   tabsClasses,
   tabScrollButtonClasses
 } from '@mui/material';
-import { select } from '../../store';
+import { select, toggleFavorite } from '../../store';
 
 const StyledTabs = styled(Tabs)({
-  height: 30,
   minHeight: 30,
   backgroundColor: '#333333',
   alignItems: 'center',
-  paddingBottom: 4,
   [`& .${tabScrollButtonClasses.root}`]: {
     borderRadius: '100%',
     width: 'fit-content',
@@ -48,26 +49,55 @@ const StyledTab = styled(Tab)({
   }
 });
 
+/**
+ * Gets favorite notes in alphabetical order.
+ *
+ * @param {Object} notes - all notes
+ * @returns {Object[]} the sorted favorite notes
+ */
+function getSortedFavorites(notes) {
+  return Object.entries(notes)
+    .filter(([, { favorite }]) => favorite)
+    .sort(([, a], [, b]) => a.title.localeCompare(b.title));
+}
+
 const FavoritesBar = () => {
   const dispatch = useDispatch();
   const notes = useSelector((store) => store.notes);
-  const favoriteNotes = useMemo(
-    () => Object.entries(notes).filter(([, { favorite }]) => favorite),
-    [notes]
-  );
+  const favoriteNotes = useMemo(() => getSortedFavorites(notes), [notes]);
+  const [menuAnchor, setMenuAnchor] = useState();
+
+  const handleContextMenuOpen = ({ target }) => {
+    if (!target.classList.contains(tabClasses.root)) { return; }
+
+    setMenuAnchor(target);
+  };
+
+  const closeMenu = () => setMenuAnchor();
+
+  const handleUnfavorite = () => {
+    dispatch(toggleFavorite(menuAnchor.id));
+    closeMenu();
+  };
 
   return (
-    <StyledTabs
-      value={false}
-      onChange={(event, noteId) => dispatch(select({ noteId }))}
-      variant="scrollable"
-      scrollButtons="auto"
-      allowScrollButtonsMobile
-    >
-      {favoriteNotes.map(([id, { title }]) => (
-        <StyledTab key={id} value={id} label={title} />
-      ))}
-    </StyledTabs>
+    <>
+      <StyledTabs
+        value={false}
+        variant="scrollable"
+        scrollButtons="auto"
+        allowScrollButtonsMobile
+        onChange={(event, noteId) => dispatch(select({ noteId }))}
+        onContextMenu={handleContextMenuOpen}
+      >
+        {favoriteNotes.map(([id, { title }]) => (
+          <StyledTab key={id} id={id} value={id} label={title} />
+        ))}
+      </StyledTabs>
+      <Menu open={!!menuAnchor} anchorEl={menuAnchor} onClose={closeMenu}>
+        <MenuItem onClick={handleUnfavorite}>Unfavorite</MenuItem>
+      </Menu>
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - favorites bar
 - favorite toggle added to NoteTreeItem's context menu
+- fullscreen support
 
 ## [0.1.0] - 2022-07-17
 ### Added
