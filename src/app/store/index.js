@@ -10,5 +10,6 @@ export {
   cancelNewNoteRename,
   select,
   moveNote,
-  saveNote
+  saveNote,
+  toggleFavorite
 } from './notesSlice';

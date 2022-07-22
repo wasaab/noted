@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 import { Box, Paper } from '@mui/material';
 import { Resizable } from 're-resizable';
 import { IpcEvent } from '../../model';
-import Toolbar from './Toolbar';
+import { Toolbar } from '../Toolbar';
 import { SearchTree, NoteTree } from '../Tree';
 
 const Drawer = ({ onSettingsOpen, onTrashOpen }) => {

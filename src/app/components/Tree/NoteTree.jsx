@@ -1,10 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  FolderOutlined as FolderIcon,
-  TextSnippetOutlined as FileIcon
-} from '@mui/icons-material';
 import { DirId } from '../../model';
 import { select } from '../../store';
 import { NoteTreeItem } from '../TreeItem';
@@ -75,7 +71,7 @@ const NoteTree = ({ hidden }) => {
   useEffect(expandParentsOfCreatedDir, [createdNoteId]);
 
   const renderTree = (id, parentIds = [DirId.ROOT]) => {
-    const { title, childIds } = notes[id];
+    const { title, childIds, favorite } = notes[id];
 
     const handleSelection = () => {
       const selected = childIds
@@ -94,7 +90,8 @@ const NoteTree = ({ hidden }) => {
         parentIds={parentIds}
         createdNoteId={createdNoteId}
         labelText={title}
-        labelIcon={childIds ? FolderIcon : FileIcon}
+        isDir={!!childIds}
+        isFav={favorite}
         onClick={handleSelection}
       >
         {childIds?.map((childId) => renderTree(childId, [...parentIds, id]))}
