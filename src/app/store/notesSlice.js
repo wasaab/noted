@@ -210,9 +210,13 @@ export const notesSlice = createSlice({
     moveNote: (state, action) => {
       // Todo: Implement
     },
-    saveNote: (state, { payload }) => {
-      window.ipc.send(IpcEvent.SAVE_NOTE, state.selectedNoteId, payload);
+    saveNote: (state, { payload: content }) => {
+      window.ipc.send(IpcEvent.SAVE_NOTE, state.selectedNoteId, content);
       sortNotesByLastUpdated(state);
+    },
+    toggleFavorite: (state, { payload: noteId }) => {
+      state.notes[noteId].favorite = !state.notes[noteId].favorite;
+      storeNotes(state);
     }
   }
 });
@@ -228,7 +232,8 @@ export const {
   cancelNewNoteRename,
   select,
   moveNote,
-  saveNote
+  saveNote,
+  toggleFavorite
 } = notesSlice.actions;
 
 export default notesSlice.reducer;
