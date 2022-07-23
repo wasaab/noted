@@ -3,7 +3,7 @@ name: Publish
 on:
   push:
     branches:
-      - hotfix/**
+      - main
 
 jobs:
   publish:
@@ -20,12 +20,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16
-          cache: npm
 
       - name: Add version tag
         uses: Klemensas/action-autotag@stable
-        with:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Install dependencies
         run: yarn

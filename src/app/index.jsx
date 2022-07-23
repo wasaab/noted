@@ -33,6 +33,7 @@ const StyledEditor = styled(Editor)(({ theme }) => `
   }
 
   & .ProseMirror {
+    width: 0px;
     padding: 16px 32px;
     overflow-y: auto;
     flex: 1;
