@@ -12,10 +12,10 @@ import {
 } from '@mui/material';
 import { select, toggleFavorite } from '../../store';
 
-export const toolbarHeight = '30px';
+export const favBarHeight = '30px';
 
 const StyledTabs = styled(Tabs)({
-  minHeight: toolbarHeight,
+  minHeight: favBarHeight,
   backgroundColor: '#333333',
   alignItems: 'center',
   [`& .${tabScrollButtonClasses.root}`]: {

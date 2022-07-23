@@ -8,7 +8,7 @@ import {
   FavoritesBar,
   SettingsModal,
   TrashModal,
-  toolbarHeight
+  favBarHeight
 } from './components';
 import { darkTheme, editorColorTheme } from './styles';
 import { saveNote } from './store';
@@ -100,7 +100,7 @@ export default function Index() {
         />
         <Box display="flex" flexDirection="column" width="100%">
           <FavoritesBar />
-          <Box display="flex" height={`calc(100% - ${toolbarHeight})`}>
+          <Box display="flex" height={`calc(100% - ${favBarHeight})`}>
             <Drawer
               onSettingsOpen={() => setModalType(ModalType.SETTINGS)}
               onTrashOpen={() => setModalType(ModalType.TRASH)}
