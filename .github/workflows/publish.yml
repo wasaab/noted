@@ -3,35 +3,23 @@ name: Publish
 on:
   push:
     branches:
-      - main
+      - hotfix/**
 
 jobs:
   publish:
-    # To enable auto publishing to github, update your electron publisher
-    # config in package.json > "build" and remove the conditional below
-    if: ${{ github.repository_owner == 'electron-react-boilerplate' }}
-
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [macos-latest]
-
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout git repo
-        uses: actions/checkout@v1
-
-      - name: Install Node and NPM
-        uses: actions/setup-node@v1
+      - name: Checkout Git repository
+        uses: actions/checkout@v2
         with:
-          node-version: 16
-          cache: npm
-
+          fetch-depth: 0
+      - name: Add version tag
+        uses: Klemensas/action-autotag@stable
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       - name: Install dependencies
-        run: |
-          npm install
-
-      - name: Publish releases
+        run: yarn
+      - name: Publish release to GH
         env:
           # These values are used for auto updates signing
           APPLE_ID: ${{ secrets.APPLE_ID }}
