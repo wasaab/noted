@@ -87,8 +87,7 @@ const Toolbar = ({
       sx={{
         width: '100%',
         boxSizing: 'border-box',
-        boxShadow: 3,
-        mb: 1
+        boxShadow: 3
       }}
     >
       <Box paddingX={1} paddingY={1.5}>

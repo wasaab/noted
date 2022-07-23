@@ -31,6 +31,7 @@ ipcRenderer.send(IpcEvent.LOAD_NOTES, localStorage.getItem(DirId.STORAGE));
 window.addEventListener('DOMContentLoaded', () => {
   new Titlebar({
     backgroundColor: Color.fromHex('#333333'),
-    icon: '../../../assets/icon.svg'
+    icon: '../../../assets/icon.svg',
+    containerOverflow: 'visisble'
   });
 });

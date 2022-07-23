@@ -12,8 +12,10 @@ import {
 } from '@mui/material';
 import { select, toggleFavorite } from '../../store';
 
+export const favBarHeight = '30px';
+
 const StyledTabs = styled(Tabs)({
-  minHeight: 30,
+  minHeight: favBarHeight,
   backgroundColor: '#333333',
   alignItems: 'center',
   [`& .${tabScrollButtonClasses.root}`]: {
@@ -40,8 +42,8 @@ const StyledTab = styled(Tab)({
   whiteSpace: 'nowrap',
   flexDirection: 'row',
   borderRadius: 16,
-  height: 24,
-  minHeight: 24,
+  height: 23,
+  minHeight: 23,
   minWidth: 48,
   padding: '0px 8px',
   '&:hover': {
