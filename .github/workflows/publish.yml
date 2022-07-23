@@ -9,17 +9,24 @@ jobs:
   publish:
     runs-on: macos-latest
     steps:
-      - name: Checkout Git repository
-        uses: actions/checkout@v2
+      - name: Checkout git repo
+        uses: actions/checkout@v1
+
+      - name: Install Node and NPM
+        uses: actions/setup-node@v1
         with:
-          fetch-depth: 0
+          node-version: 16
+          cache: npm
+
       - name: Add version tag
         uses: Klemensas/action-autotag@stable
         with:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
       - name: Install dependencies
         run: yarn
-      - name: Publish release to GH
+
+      - name: Publish release
         env:
           # These values are used for auto updates signing
           APPLE_ID: ${{ secrets.APPLE_ID }}
