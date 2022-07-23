@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - publish github workflow enabled
 - npm --> yarn in github workflows
 
+## Fixed
+- vertical scrolling for trees and editor
+
 ## [0.2.0] - 2022-07-22
 ### Added
 - favorites bar

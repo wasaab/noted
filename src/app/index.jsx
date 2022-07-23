@@ -3,18 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box, CssBaseline, styled, ThemeProvider } from '@mui/material';
 import debounce from 'lodash.debounce';
 import Editor from '@noted-md/rich-markdown-editor';
-import { Drawer, FavoritesBar, SettingsModal, TrashModal } from './components';
+import {
+  Drawer,
+  FavoritesBar,
+  SettingsModal,
+  TrashModal,
+  toolbarHeight
+} from './components';
 import { darkTheme, editorColorTheme } from './styles';
 import { saveNote } from './store';
 import { IpcEvent } from './model';
 
 const StyledEditor = styled(Editor)(({ theme }) => `
   width: 100%;
-  overflow-y: auto;
   background-color: ${theme.palette.grey[900]};
 
   & > div {
-    box-sizing: border-box;
     flex: 1;
     display: flex;
     overflow-y: hidden;
@@ -95,7 +99,7 @@ export default function Index() {
         />
         <Box display="flex" flexDirection="column" width="100%">
           <FavoritesBar />
-          <Box display="flex" height="100%">
+          <Box display="flex" height={`calc(100% - ${toolbarHeight})`}>
             <Drawer
               onSettingsOpen={() => setModalType(ModalType.SETTINGS)}
               onTrashOpen={() => setModalType(ModalType.TRASH)}
