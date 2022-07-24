@@ -4,7 +4,9 @@ import {
   Box,
   Divider,
   IconButton,
+  outlinedInputClasses,
   Paper,
+  styled,
   TextField,
   Typography
 } from '@mui/material';
@@ -58,6 +60,17 @@ Counter.propTypes = {
   value: PropTypes.number.isRequired
 };
 
+const ScrollableTextField = styled(TextField)(({ theme }) => ({
+  [`.${outlinedInputClasses.root}`]: {
+    paddingRight: '4px'
+  },
+  [`.${outlinedInputClasses.input}`]: {
+    color: theme.palette.text.secondary,
+    overflowY: 'overlay',
+    paddingRight: '10px'
+  }
+}));
+
 const Toolbar = ({
   searchResults,
   onSettingsOpen,
@@ -91,16 +104,15 @@ const Toolbar = ({
       }}
     >
       <Box paddingX={1} paddingY={1.5}>
-        <TextField
+        <ScrollableTextField
           id="search"
+          label="Search"
           size="small"
-          fullWidth
           variant="outlined"
+          fullWidth
           multiline
           maxRows={7}
-          label="Search"
           disabled={!isRootDirCreated}
-          inputProps={{ sx: { color: 'text.secondary' } }}
           onChange={handleSearch}
         />
       </Box>

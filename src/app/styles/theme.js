@@ -75,6 +75,23 @@ const darkTheme = createTheme({
         .cet-action-label,
         .keybinding`]: {
           color: secondaryTextColor
+        },
+        '*::-webkit-scrollbar': {
+          width: 12
+        },
+        'textarea::-webkit-scrollbar': {
+          width: 6
+        },
+        [`*:hover::-webkit-scrollbar-thumb,
+        .MuiPaper-rounded::-webkit-scrollbar-thumb,
+        #block-menu-container::-webkit-scrollbar-thumb`]: {
+          backgroundColor: 'rgba(255, 255, 255, 0.15)'
+        },
+        [`textarea::-webkit-scrollbar-thumb,
+        pre::-webkit-scrollbar-thumb,
+        .MuiPaper-rounded::-webkit-scrollbar-thumb,
+        #block-menu-container::-webkit-scrollbar-thumb`]: {
+          borderRadius: 4
         }
       }
     }

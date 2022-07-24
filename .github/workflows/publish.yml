@@ -23,6 +23,8 @@ jobs:
 
       - name: Add version tag
         uses: Klemensas/action-autotag@stable
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Install dependencies
         run: yarn
