@@ -12,7 +12,7 @@ const TrashTreeItem = ({ labelIcon, labelText, level, ...rest }) => {
         ml={0.5}
         mr={1}
       />
-      <Typography variant="body2" sx={{ flexGrow: 1 }} pt={0.5} pb={0.5}>
+      <Typography variant="body2" sx={{ flexGrow: 1 }} py={0.5}>
         {labelText}
       </Typography>
     </Box>

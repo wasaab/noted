@@ -10,7 +10,7 @@ const StyledTreeView = styled(TreeView)({
   width: '100%',
   height: '100%',
   flexGrow: 1,
-  overflowY: 'auto',
+  overflowY: 'overlay',
   padding: '8px 0px'
 });
 

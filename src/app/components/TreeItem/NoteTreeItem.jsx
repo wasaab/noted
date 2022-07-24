@@ -6,6 +6,7 @@ import {
   FolderOutlined as FolderIcon,
   TextSnippetOutlined as FileIcon
 } from '@mui/icons-material';
+import { treeItemClasses } from '@mui/lab';
 import { useDispatch } from 'react-redux';
 import {
   cancelNewNoteRename,
@@ -115,8 +116,8 @@ const NoteTreeItem = ({
       ) : (
         <Typography
           variant="body2"
-          pt={0.5}
-          pb={0.5}
+          py={0.5}
+          pr={2}
           sx={{ flexGrow: 1, wordBreak: 'break-word' }}
           onDoubleClick={() => initiateRename()}
         >
@@ -132,6 +133,11 @@ const NoteTreeItem = ({
         nodeId={id}
         label={renderLabel()}
         level={parentIds.length}
+        sx={{
+          [`& .${treeItemClasses.content}`]: {
+            pr: 0
+          }
+        }}
         {...rest}
       />
       <Menu
