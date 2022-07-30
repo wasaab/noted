@@ -932,10 +932,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@noted-md/rich-markdown-editor@^11.22.0":
-  version "11.22.0"
-  resolved "https://registry.yarnpkg.com/@noted-md/rich-markdown-editor/-/rich-markdown-editor-11.22.0.tgz#d6e41a63bfd5b4de38ca85fbea71f69c51a10177"
-  integrity sha512-qIr92WBgOM8OMmAyBgcmnkOhqD87Ml0lZirt0Kj3FOswRyN6Q79OgITfaAZVuOm5O3tg672keradzwZtjeBQDg==
+"@noted-md/rich-markdown-editor@^12.0.1":
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/@noted-md/rich-markdown-editor/-/rich-markdown-editor-12.0.1.tgz#32c970d7562f13a583b24cff30893a8fcd4bab83"
+  integrity sha512-INLXiMSc/OO7UumROIWwbVpRRkmGuzaxU1Q0Im81oLtwjfdHDzmXvAYKW+/thhxmRzowY963jnq/hnOncgaVwQ==
   dependencies:
     copy-to-clipboard "^3.0.8"
     fuzzy-search "^3.2.1"

@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2022-07-30
+### Added
+- switch between preview and raw markdown w/ right click
+
+### Changed
+- rich-markdown-editor dep upgraded (v11.22.0 --> v12.0.1)
+
+### Fixed
+- modals stay within container bounds
+
 ## [0.2.2] - 2022-07-23
 ### Changed
 - scrollbar styling

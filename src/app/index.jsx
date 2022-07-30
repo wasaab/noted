@@ -66,6 +66,7 @@ export default function Index() {
   const selectedNoteId = useSelector((store) => store.selectedNoteId);
   const [initialValue, setInitialValue] = useState(unselectedInitialVal);
   const [modalType, setModalType] = useState();
+  const [raw, setRaw] = useState(false);
 
   const handleInputChange = (val) => {
     dispatch(saveNote(val()));
@@ -107,12 +108,14 @@ export default function Index() {
             />
             <StyledEditor
               dark
+              raw={raw}
               value={selectedNoteId ? initialValue : unselectedInitialVal}
               placeholder="# Title"
               readOnly={!selectedNoteId}
               dictionary={{ newLineEmpty: undefined }}
               colorTheme={editorColorTheme}
               onChange={debouncedSave}
+              onContextMenu={() => setRaw((prev) => !prev)}
               onBlur={() => setInitialValue('')}
             />
           </Box>
