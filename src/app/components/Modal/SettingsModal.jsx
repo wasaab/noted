@@ -48,46 +48,44 @@ const SettingsModal = ({ open, onClose, onSave }) => {
   };
 
   return (
-    <div>
-      <Dialog open={open} onClose={onClose} fullWidth maxWidth="xs">
-        <DialogTitle>Settings</DialogTitle>
-        <DialogContent>
-          <TextField
-            value={notesDir}
-            autoFocus
-            margin="normal"
-            id="dir"
-            label="Notes Directory"
-            fullWidth
-            variant="outlined"
-            InputProps={{
-              readOnly: true,
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="select notes directory"
-                    onClick={fireSelectNotesDirEvent}
-                    edge="end"
-                    size="small"
-                    sx={{ p: 1 }}
-                  >
-                    <FolderOpen />
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button variant="outlined" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button variant="outlined" onClick={onSave}>
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="xs">
+      <DialogTitle>Settings</DialogTitle>
+      <DialogContent>
+        <TextField
+          value={notesDir}
+          autoFocus
+          margin="normal"
+          id="dir"
+          label="Notes Directory"
+          fullWidth
+          variant="outlined"
+          InputProps={{
+            readOnly: true,
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="select notes directory"
+                  onClick={fireSelectNotesDirEvent}
+                  edge="end"
+                  size="small"
+                  sx={{ p: 1 }}
+                >
+                  <FolderOpen />
+                </IconButton>
+              </InputAdornment>
+            )
+          }}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button variant="outlined" onClick={onClose}>
+          Cancel
+        </Button>
+        <Button variant="outlined" onClick={onSave}>
+          Save
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

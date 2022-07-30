@@ -39,7 +39,8 @@ export const editorColorTheme = {
   toolbarItem: primaryTextColor,
   toolbarItemSelected: selectedColor,
   tableDivider: borderColor,
-  quote: blueGrey[200]
+  quote: blueGrey[200],
+  markdownText: '#7693ba'
 };
 
 const darkTheme = createTheme({
@@ -92,6 +93,9 @@ const darkTheme = createTheme({
         .MuiPaper-rounded::-webkit-scrollbar-thumb,
         #block-menu-container::-webkit-scrollbar-thumb`]: {
           borderRadius: 4
+        },
+        '.MuiPaper-root, .MuiTypography-root, .MuiTabs-root': {
+          userSelect: 'none'
         }
       }
     }

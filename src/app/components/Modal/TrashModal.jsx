@@ -136,86 +136,91 @@ const TrashModal = ({ open, onClose }) => {
   }, [open, notes]);
 
   return (
-    <div>
-      <Dialog open={open} onClose={onClose} fullWidth maxWidth="xs">
-        <DialogTitle>Trash</DialogTitle>
-        <DialogContent>
-          {Object.keys(trash).length === 0 && (
-            <DialogContentText display="flex" flexDirection="column">
-              <Typography variant="h6" fontSize="1.1em" component="span">
-                Empty
+    <Dialog
+      open={open}
+      onClose={onClose}
+      disablePortal
+      fullWidth
+      maxWidth="xs"
+      sx={{ position: 'absolute' }}
+    >
+      <DialogTitle>Trash</DialogTitle>
+      <DialogContent>
+        {Object.keys(trash).length === 0 && (
+          <DialogContentText display="flex" flexDirection="column">
+            <Typography variant="h6" fontSize="1.1em" component="span">
+              Empty
+            </Typography>
+            Items deleted via the context menu will appear here.
+          </DialogContentText>
+        )}
+
+        <TrashTree
+          initialTrash={trash}
+          selectedId={selected.id}
+          onSelect={handleTrashSelection}
+        />
+      </DialogContent>
+      <DialogActions disableSpacing sx={{ flexDirection: 'column' }}>
+        <TextField
+          id="dir"
+          label="Destination"
+          select
+          value={destDirId}
+          disabled={!selected.id}
+          onChange={({ target: { value } }) => setDestDirId(value)}
+          autoFocus
+          fullWidth
+          margin="normal"
+          SelectProps={{
+            IconComponent: FolderOpen,
+            renderValue: renderDestSelectValue,
+            MenuProps: {
+              MenuListProps: { dense: true },
+              PaperProps: { sx: { maxHeight: 320 } }
+            }
+          }}
+          sx={{
+            '& .MuiSelect-icon': {
+              right: '14px',
+              transform: 'none'
+            }
+          }}
+        >
+          {menuHeaderOptions.map(({ id, label, title }) => (
+            <MenuItem key={label} value={id}>
+              <Typography variant="button" mr={3} color="textSecondary">
+                {label}
               </Typography>
-              Items deleted via the context menu will appear here.
-            </DialogContentText>
-          )}
+              {title}
+            </MenuItem>
+          ))}
+          {menuHeaderOptions.length !== 0 && <Divider />}
+          {destOptionIds.map(renderDestOption)}
+        </TextField>
 
-          <TrashTree
-            initialTrash={trash}
-            selectedId={selected.id}
-            onSelect={handleTrashSelection}
-          />
-        </DialogContent>
-        <DialogActions disableSpacing sx={{ flexDirection: 'column' }}>
-          <TextField
-            id="dir"
-            label="Destination"
-            select
-            value={destDirId}
-            disabled={!selected.id}
-            onChange={({ target: { value } }) => setDestDirId(value)}
-            autoFocus
+        <Box display="flex" width="100%" gap={1}>
+          <Button
+            disabled={!selected.id || !destDirId}
+            variant="outlined"
+            color="success"
             fullWidth
-            margin="normal"
-            SelectProps={{
-              IconComponent: FolderOpen,
-              renderValue: renderDestSelectValue,
-              MenuProps: {
-                MenuListProps: { dense: true },
-                PaperProps: { sx: { maxHeight: 320 } }
-              }
-            }}
-            sx={{
-              '& .MuiSelect-icon': {
-                right: '14px',
-                transform: 'none'
-              }
-            }}
+            onClick={handleRestore}
           >
-            {menuHeaderOptions.map(({ id, label, title }) => (
-              <MenuItem key={label} value={id}>
-                <Typography variant="button" mr={3} color="textSecondary">
-                  {label}
-                </Typography>
-                {title}
-              </MenuItem>
-            ))}
-            {menuHeaderOptions.length !== 0 && <Divider />}
-            {destOptionIds.map(renderDestOption)}
-          </TextField>
-
-          <Box display="flex" width="100%" gap={1}>
-            <Button
-              disabled={!selected.id || !destDirId}
-              variant="outlined"
-              color="success"
-              fullWidth
-              onClick={handleRestore}
-            >
-              Restore
-            </Button>
-            <Button
-              disabled={!selected.id}
-              variant="outlined"
-              color="error"
-              fullWidth
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
-          </Box>
-        </DialogActions>
-      </Dialog>
-    </div>
+            Restore
+          </Button>
+          <Button
+            disabled={!selected.id}
+            variant="outlined"
+            color="error"
+            fullWidth
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+        </Box>
+      </DialogActions>
+    </Dialog>
   );
 };
 
